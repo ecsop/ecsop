@@ -1,0 +1,26 @@
+
+Consider each document in the zip collection has the following form:
+{
+"_id": "10280",
+"city": "NEW YORK",
+"state": "NY",
+"pop": 5574,
+}
+Return the city wise population of the cities in the NY state.
+
+
+db.zip.mapReduce(
+		function() {emit(this.city,this.pop);},
+		function(key,value){return Array.sum(value)},
+		{
+		query:{state:"NY"},
+		out:"city_pop_totals"
+		}
+		);
+db.city_pop_totals.find();
+
+
+
+
+Reference URL :  https://www.mongodb.com/docs/manual/tutorial/aggregation-zip-code-data-set/
+
