@@ -21,7 +21,7 @@ mysql> create procedure withdraw(in acc_id int,in amt int)
      update account_master set Current_balance=bal where ID=acc_id;
      end if;
      end;
-     $
+     deliniter $;
 Query OK, 0 rows affected (0.05 sec)
 
 mysql> create procedure deposit(in acc_id int,in amt int)
@@ -30,7 +30,7 @@ mysql> create procedure deposit(in acc_id int,in amt int)
      select current_balance into bal from account_master where ID=acc_id;
      update account_master set current_balance=bal+amt where ID=acc_id;
      end;
-     $
+     $;
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> call withdraw(1, 5000);
