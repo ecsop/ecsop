@@ -36,8 +36,9 @@ db.Teachers.insertMany([{
     'date_of_joining':'1/1/2011'
     }])
 
-Students(Sname,roll_no,class)
-db.createCollection(‘Students’)
+
+
+db.createCollection('Students')
 db.Students.insertMany([{
     'Sname': 'Rupesh',
     'roll_no': 1,
