@@ -68,13 +68,13 @@ db.Students.find({$or:[{'roll_no':2},{'Sname':'xyz'}]}).pretty()
 6.	Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry.
 
 db.Teachers.insert({
-...     'Tname': 'Praveen',
-...     'dno': 3,
-...     'dname': 'E&TC',
-...     'experience':11,
-...     'salary':5001,
-...     'date_of_joining':'1/1/2021'
-...     })
+'Tname': 'Praveen',
+'dno': 3,
+     'dname': 'E&TC',
+     'experience':11,
+     'salary':5001,
+     'date_of_joining':'1/1/2021'
+     })
 
 db.Teachers.updateOne({Tname:'Praveen'}, {$set:{experience:10}})
 
@@ -87,12 +87,14 @@ db.Teachers.find({},{dno:0,dname:0,salary:0,date_of_joining:0})
 
 db.Teachers.save({
 'Tname': 'Rajesh',
-...     'dno': 1,
-...     'dname': 'Computer',
-...     'experience':8,
-...     'salary':50001,
-...     'date_of_joining':'1/1/2019'
+'dno': 1,
+'dname': 'Computer',
+'experience':8,
+'salary':50001,
+'date_of_joining':'1/1/2019'
 })
+
+
 10.	Using Save() method change the dept of teacher Rajesh to IT
 
 
