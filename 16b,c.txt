@@ -1,0 +1,77 @@
+-------------------16b
+
+CREATE TABLE emp (
+  id int primary key,
+  salary int 
+);
+
+INSERT INTO emp values (1,3000),(2,20000),(3,50505);
+CREATE TABLE incr_salary (
+  id int primary key,
+  salary int 
+);
+
+delimiter //
+create procedure inc_salary()
+begin
+declare temp_salary int;
+declare temp_id int;
+declare avg_salary int;
+declare exitcond boolean;
+declare cur cursor for select * from emp;
+declare continue handler for not found set exitcond=true;
+select avg(salary) into avg_salary from emp;
+open cur;
+l1:loop
+fetch cur into temp_id,temp_salary;
+if(temp_salary<avg_salary) then
+set temp_salary=temp_salary+temp_salary*0.1;
+insert into incr_salary values(temp_id,temp_salary);
+end if;
+if exitcond then
+close cur;
+leave l1;
+end if;
+end loop l1;
+end//
+
+call inc_salary()//
+
+------------16c
+create table student (
+	rollno int primary key,
+	att int,
+	status varchar(3)
+);
+
+INSERT INTO student VALUES(1,76,NULL),(2,38,NULL),(3,12,NULL);
+
+create table d_student (
+	rollno int primary key,
+	att int,
+	status varchar(3)
+);
+
+
+delimiter //
+CREATE PROCEDURE attendance()
+begin 
+declare temproll int ;
+declare done int default 0;
+declare present int ;
+declare mycur cursor for SELECT rollno, att from student;
+declare CONTINUE HANDLER for NOT FOUND SET done = 1;
+open mycur;
+myloop :LOOP
+fetch mycur into temproll , present;
+if present < 75 then 
+update student set status = "D" where rollno = temproll;
+insert into d_student values(temproll , present , "D");
+if done = 1 then close mycur; leave myloop;
+end if;
+end if;
+end LOOP myloop;
+end //
+
+
+call attendance()//
